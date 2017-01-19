@@ -1,0 +1,204 @@
+* QUESTIONS
+- should the user enter their zip code in the very beginning?
+	a lot of these use location — would be nice to have as a variable up front
+	if so, how can i perform a search on my website based on their zip code and return the first few results? is there a google search api?
+		* google custom search api - read up on how to do this
+- should each thing only have one of a few options? (see step 2 below)
+- should i use "fucking"? or "freakin"? or anything at all?
+- what should i call it?
+- how should the ux for the main page work?
+- how should the ux for the submit (post) page work?
+- design? colors? layout? fonts?
+
+
+* ADVICE
+1. the thing
+2. i want to do that...
+	here's how...
+		create a mini app with api's
+		links to external sites
+		make an illustration/image/interactive something "then fucking do it"
+3. i don't want to do this thing. find me another thing.
+
+
+ *THINGS
+ {
+    thing: "Go take a fucking hike.",
+    thingNumber: 1
+    // will use api (weather and trails)
+},
+
+{
+    thing: "Adopt a fucking pet.",
+    thingNumber: 2,
+    searchTerm: "pet adoption"
+}
+
+{
+    thing: "Make a cup of fucking tea.",
+    thingNumber: 3,
+    link: "https://www.mrporter.com/journal/Journal_issue8/8"
+}
+
+{
+    thing: "Go fucking dancing.",
+    thingNumber: 4,
+    searchTerm: "dance clubs"
+}
+
+{
+    thing: "Bake a fucking cake.",
+    thingNumber: 5,
+    link: "http://www.theydrawandcook.com/search/results?utf8=%E2%9C%93&search%5Bconditions%5D%5Bcourses%5D=Cake%2FPie%2FMuffin&search%5Bconditions%5D%5Bingredients%5D=&search%5Bconditions%5D%5Bartist%5D=&search%5Bconditions%5D%5Bstyles%5D=&search%5Bterm%5D=cake&button="
+}
+
+{
+    thing: "Walk around barefoot in the fucking grass.",
+    thingNumber: 6,
+    searchTerm: "parks"
+}
+
+{
+    thing: "Learn a new fucking word. Use it.",
+    thingNumber: 7,
+    link: "https://www.merriam-webster.com/word-of-the-day"
+}
+
+{
+    thing: "Make a fucking meal. Share it with your friends.",
+    thingNumber: 8,
+    link: "http://www.whatthefuckshouldimakefordinner.com"
+}
+
+{
+    thing: "Go fucking skydiving.",
+    thingNumber: 9,
+    searchTerm: "skydiving"
+}
+
+{
+    thing: "Buy a plane ticket to a random fucking location. Use it.",
+    thingNumber: 10,
+    link: "https://www.kayak.com/explore/"
+}
+
+{
+    thing: "Get a fucking great haircut.",
+    thingNumber: 11,
+    searchTerm: "haircuts"
+}
+
+{
+    thing: "Climb a fucking tree.",
+    thingNumber: 12,
+    searchTerm: "parks"
+}
+
+{
+    thing: "Go fucking swimming.",
+    thingNumber: 13,
+    searchTerm: "public pools"
+}
+
+{
+    thing: "Read a fucking book.",
+    thingNumber: 14,
+    searchTerm: "libraries"
+}
+
+{
+    thing: "Call your fucking mom.",
+    thingNumber: 15,
+    link: "https://www.skype.com/en/"
+}
+
+{
+    thing: "Drink a fucking beer.",
+    thingNumber: 16,
+    searchTerm: "bars"
+}
+
+{
+    thing: "Take a fucking nap.",
+    thingNumber: 17,
+    link: "http://kammok.com/collections/hammocks"
+}
+
+{
+    thing: "Watch a fucking documentary.",
+    thingNumber: 18,
+    link: "http://topdocumentaryfilms.com/"
+}
+
+{
+    thing: "Write a fucking poem.",
+    thingNumber: 19,
+    link: "https://www.poetryfoundation.org/"
+}
+
+{
+    thing: "Explore a new fucking part of town.",
+    thingNumber: 20,
+    // will use api (google maps)
+}
+
+{
+    thing: "Do some fucking meditation.",
+    thingNumber: 21,
+    link: "https://medium.com/@mattmartini/mindfulness-of-breathing-meditation-50fffa23f420#.uhbiw6o7q"
+}
+
+{
+    thing: "Take a fucking yoga class.",
+    thingNumber: 22,
+    searchTerm: "yoga classes"
+}
+
+{
+    thing: "Learn to play a fucking instrument.",
+    thingNumber: 23,
+    searchTerm: "music lessons"
+}
+
+{
+    thing: "Take a fucking dance class.",
+    thingNumber: 24,
+    searchTerm: "dance lessons"
+}
+
+{
+    thing: "Go see a fucking movie by yourself.",
+    thingNumber: 25,
+    searchTerm: "movie times"
+}
+
+{
+    thing: "Go on a fucking date.",
+    thingNumber: 26,
+    searchTerm: "top date spots"
+}
+
+{
+    thing: "Go fucking camping.",
+    thingNumber: 27,
+    // will use api (weather and campground)
+}
+
+{
+    thing: "Look up at the stars and talk about the fucking universe.",
+    thingNumber: 28,
+    // will use api (weather and campground)
+}
+
+
+
+
+* API'S
+mashape trailAPI:
+	no key, as far as i know
+open weather map:
+	df91bce1942a27843b3b36556dfc230e
+campground search api through active access:
+	campground search: 4xhxzg85vtzw2rqze6dv684j
+google places api (for parks, bars, restaurants, etc):
+	AIzaSyBJWXKRibdhBGrfe_WU03w7sjLi2D_fdLk
