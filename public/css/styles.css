@@ -1,0 +1,111 @@
+body {
+	background: #fff;
+	font-family: 'Raleway', sans-serif;
+}
+
+h1 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 400;
+	color: #eaa085;
+}
+
+h4 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 200;
+	text-transform: uppercase;
+	font-size: 35px;
+	color: #fff;
+}
+
+button {
+	width: 500px;
+	font-family: 'Nunito', sans-serif;
+	font-weight: 400;
+	color: #eaa085;
+	font-size: 12px;
+	background-color: transparent;
+  	border-radius: 4px;
+  	border: 1px solid #eaa085;
+}
+
+button:hover {
+	color: #FFF;
+  	background-color: #eaa085;
+  	border-color: #eaa085; 
+}
+
+.buttons {
+	margin-left: -10px;
+}
+
+/*#nav ul li {
+	display: inline;
+	margin: 0 20px 0 0;
+	margin-bottom: 130px;
+}*/
+
+#header {
+	position: fixed;
+    top: 94%;
+    padding: 22px;
+    transform-origin: 0 0;
+    transform: rotate(-90deg) translate(0,0);
+}
+
+#header-sidebar {
+	background-color: #eaa085;
+	min-height: 918px;
+	width: 5.5%;
+}
+
+#gradient-content {
+	background: rgba(110,148,201,1);
+background: -moz-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
+background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(110,148,201,1)), color-stop(49%, rgba(151,201,184,1)), color-stop(100%, rgba(224,248,180,1)));
+background: -webkit-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
+background: -o-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
+background: -ms-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
+background: linear-gradient(135deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', endColorstr='#e0f8b4', GradientType=1 );
+	margin-left: 0px;
+	min-height: 918px;
+	width: 42.5%;
+	padding-top: 140px;
+	padding-bottom: 140px;
+	padding-left: 70px;
+	padding-right: 160px;
+}
+
+#thing-content {
+	background-color: #fff;
+	margin-left: 0px;
+	min-height: 918px;
+	width: 52%;
+	padding-top: 180px;
+	padding-bottom: 180px;
+	padding-left: 20px;
+	text-align: center;
+}
+
+h1.thing {
+	margin-left: -122px;
+	font-size: 100px;
+	text-align: left !important;
+	margin-top: 100px;
+}
+
+.nav {
+	height: 25px;
+	background-color: #fff;
+	padding: 25px;
+	margin-left: -20px;
+	margin-top: -180px;
+}
+
+.footer {
+	height: 25px;
+	background-color: #fff;
+	margin-left: -20px;
+	padding: 25px;
+	margin-top: 140px;
+}
