@@ -5,28 +5,42 @@ html {
 body {
 	background: #fff;
 	font-family: 'Source Sans Pro', sans-serif;
+	cursor: cell;
+	color: #555;
 }
 
-p.body {
+p {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 16px;
 	font-weight: 300;
 	line-height: 2;
-	color: #fff;
+	text-transform: lowercase;
 }
 
-container {
-	width: 100vh;
+a {
+  	color: #555;
+  	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 2;
+	text-decoration: none;
+	text-transform: lowercase;
+}
+
+a:hover {
+  	color: #eaa085;
+  	text-decoration: overline; 
+  	cursor: crosshair;
 }
 
 h1 {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
 	color: #eaa085;
-	margin-left: -122px;
+	margin-left: -110px;
+	margin-right: 20px;
 	font-size: 105px;
 	text-align: left !important;
-	margin-top: 100px;
 }
 
 h3 {
@@ -35,6 +49,8 @@ h3 {
 	color: #eaa085;
 	font-size: 20px;
 	letter-spacing: .25px;
+	text-align: left !important;
+	margin-left: -390px;
 }
 
 h4 {
@@ -60,13 +76,23 @@ button:hover {
 	color: #FFF;
   	background-color: #eaa085;
   	border-color: #eaa085; 
+  	cursor: crosshair;
 }
 
-/*#nav ul li {
+ul li {
 	display: inline;
 	margin: 0 20px 0 0;
 	margin-bottom: 130px;
-}*/
+}
+
+span.copyright {
+	padding-right: 440px;
+}
+
+span.icons {
+	padding-right: 10px;
+	padding-left: 10px;
+}
 
 #sidebar {
 	position: fixed;
@@ -103,50 +129,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', end
 	margin-right: 160px;
 }
 
-.numberAdvice {
-	display: block;
-	position: absolute;
-	top: 185px;
-	margin-left: 20px;
-}
-
-.advice {
-	display: block;
-	position: absolute;
-	top: 115px;
-	margin-left: 20px;
-	margin-right: 20px;
-}
-
 #thing-content {
-	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
 	background-color: #fff;
 	margin-left: 0px;
 	height: 100vh;
 	width: 52%;
 }
 
-.buttons {
-	display: block;
-	position: absolute;
-	right: 180px;
-	bottom: 195px;
-}
-
 .nav {
-	display: block;
-	position: absolute;
+	align-items: stretch;
 	height: 25px;
 	background-color: #fff;
 	padding: 25px;
-	top: 0px;
+}
+
+.numberAdvice {
+	margin-top: 95px;
+}
+
+.advice {
+	flex-grow: 1;
+	margin-left: 20px;
+	margin-top: -20px;
+}
+
+.buttons {
+	flex-grow: 1;
+	margin-top: 200px;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
 }
 
 .footer {
-	display: block;
-	position: absolute;
+	align-items: stretch;
 	height: 25px;
 	background-color: #fff;
 	padding: 25px;
-	bottom: 0px;
 }

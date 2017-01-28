@@ -96,16 +96,29 @@ function displayRandomAdvice() {
 function latLongConversion(lat, long) {
   $.ajax({url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + userLat + "," + userLong + "&key=" + googleGeocodeKey, method: "GET"}).done(function(response) {
       // drills down and returns the user's city
-      userLocation = response.results[4].address_components[0].long_name;
+      userLocation = response.results[4].address_components[1].short_name;
       console.log(userLocation);
+      getWeather();
   });
 };
 
 // this function uses the user's lat/long plus the current advice's search terms from the database, plugs them into the google places api, and returns top locations nearby
 function placeSearch() {
-  $.get({url: "https://maps.googleapis.com/maps/api/place/textsearch/json?location=" + userLat + "," + userLong + "&radius=500&query=" + adviceSearchTerm +"&key=" + googleKey,}).done(function(response) {
-      // drills down and returns the user's city
+  $.ajax({url: "https://maps.googleapis.com/maps/api/place/textsearch/json?location=" + userLat + "," + userLong + "&radius=500&query=" + adviceSearchTerm +"&key=" + googleKey, method: "GET", dataType: "JSONP"}).done(function(response) {
+      // drills down
       console.log(response);
+  });
+};
+
+// this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
+function getWeather() {
+  $.ajax({url: "http://api.openweathermap.org/data/2.5/weather?APPID=" + weatherKey + "&q=" + userLocation, method: "GET"}).done(function(response) {
+      // drills down to get current temp (must be converted to farenheit), city, humidity, and wind
+      var city = response.name;
+      var temp = Math.round((9/5 * (response.main.temp - 273) + 32)) + "°F";
+      var humidity = response.main.humidity + "°";
+      var wind = response.wind.speed + "mph";
+      console.log(temp + " | " + humidity + " | " + wind);
   });
 };
 
