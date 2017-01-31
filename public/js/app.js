@@ -19,10 +19,11 @@ var googleKey = "AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg";
 // ========== ON PAGE LOAD ========== //
 
 // initially show a piece of advice on page load
-  displayRandomAdvice();
+  //displayRandomAdvice();
+  display();
 // on "show me another thing" button click
 $("#buttonNo").click(function() {
-  displayRandomAdvice();
+  //displayRandomAdvice();
 });
 
 // initialize firebase
@@ -100,6 +101,18 @@ function displayRandomAdvice() {
         doAdvice();
       }
     });
+};
+
+function display() {
+  console.log("hi");
+  //var currentURL = window.location.origin;
+  $.ajax({
+    url: "/random",
+    method: "GET"
+  }).done(function(data) {
+    console.log(data);
+    console.log("got it");
+  });
 };
 
 // function for turning user's lat/long (from browser's geocode) to an address using google's geolocation api.
