@@ -46,11 +46,11 @@ db.once("open", function() {
 // ========== ROUTES ========== //
 
 var Advice = require("./model.js")
-// get one random piece of advice from advice collection
 
+// get one random piece of advice from advice collection
 app.get("/random", function(req, res) {
-	console.log("hit");
-	Advice.find({})
+	var random = Math.floor(Math.random() * 28);
+	Advice.findOne().skip(random)
 	.exec(function(error, doc) {
 		if (error) {
 			res.send(error);
@@ -61,20 +61,6 @@ app.get("/random", function(req, res) {
 		}
 	});
 });
-
-// app.get("/random", function(req, res) {
-// 	// query: return one random thing
-// 	db.advice.aggregate( { $sample: { size: 1 } }, function(error, found) {
-// 		// log any errors
-// 		if (error) {
-// 			console.log(error);
-// 		}
-// 		// otherwise, send the result of the query to the browser
-// 		else {
-// 			res.json(found);
-// 		}
-// 	});
-// });
 
 // set the app to listen on port 3000
 app.listen(process.env.PORT || 3000, function() {

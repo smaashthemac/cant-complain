@@ -10,20 +10,19 @@ var adviceLink;
 var adviceSearchTerm;
 
 // api keys
-var weatherKey = "df91bce1942a27843b3b36556dfc230e";
+var weatherKey = "qxjFsG464oGf6g9yZCPBnT8UycfEDGOR";
 var campgroundKey = "4xhxzg85vtzw2rqze6dv684j";
 var trailKey = "iApNnB6tFfmshslaidIgWbkRfgfZp1pocQ1jsnwF9jWfxtFIjC";
 var googleGeocodeKey = "AIzaSyBW-dCwfLOYD4tepelNbTvSHv9lJYoMc1I";
 var googleKey = "AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg";
 
 // ========== ON PAGE LOAD ========== //
-
 // initially show a piece of advice on page load
-  //displayRandomAdvice();
-  display();
+displayRandomAdvice();
 // on "show me another thing" button click
 $("#buttonNo").click(function() {
-  //displayRandomAdvice();
+  displayRandomAdvice();
+
 });
 
 // initialize firebase
@@ -79,40 +78,25 @@ geoFindMe();
 // function for displaying advice randomly from the database
 // sets advice variable, adviceNumber variable, adviceLink variable (if there is a link) and adviceSearchTerm variable (if there are search terms)
 function displayRandomAdvice() {
-    $.getJSON("/random", function(data) {
-      // for each entry of that json...
-      for (var i = 0; i < data.length; i++) {
-        advice = data[i].thing;
-        console.log(advice);
-        // display that advice in its div
-        $(".advice").html("<h1>" + data[i].thing + "</h1>");
-        // display advice number in its div
-        $(".numberAdvice").html("<h3><i>advice # " + data[i].thingNumber + "  _____</i></h3>");
-        adviceNumber = data[i].thingNumber;
-        //console.log(adviceNumber);
-          if (data[i].link) {
-            adviceLink = data[i].link;
-            //console.log(adviceLink);
-          } else if (data[i].searchTerm) {
-            adviceSearchTerm = data[i].searchTerm;
-            console.log(adviceSearchTerm);
-          }
-        // calls the function doAdvice  
-        doAdvice();
-      }
-    });
-};
-
-function display() {
-  console.log("hi");
-  //var currentURL = window.location.origin;
   $.ajax({
     url: "/random",
     method: "GET"
   }).done(function(data) {
-    console.log(data);
-    console.log("got it");
-  });
+    advice = data.thing;
+    console.log(advice);
+    // display that advice in its div
+    $(".advice").html("<h1>" + advice + "</h1>");
+    adviceNumber = data.thingNumber;
+    // display advice number in its div
+    $(".numberAdvice").html("<h3><i>advice # " + data.thingNumber + "  _____</i></h3>");
+    if (data.link) {
+            adviceLink = data.link;
+            //console.log(adviceLink);
+          } else if (data.searchTerm) {
+            adviceSearchTerm = data.searchTerm;
+            console.log(adviceSearchTerm);
+          }  
+    });
 };
 
 // function for turning user's lat/long (from browser's geocode) to an address using google's geolocation api.
@@ -122,7 +106,7 @@ function latLongConversion(lat, long) {
       // drills down and returns the user's city
       userLocation = response.results[4].address_components[1].short_name;
       console.log(userLocation);
-      getWeather();
+      //getWeather();
   });
 };
 
@@ -136,13 +120,14 @@ function placeSearch() {
 
 // this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
 function getWeather() {
-  $.ajax({url: "https://api.openweathermap.org/data/2.5/weather?APPID=" + weatherKey + "&q=" + userLocation, method: "GET"}).done(function(response) {
+  $.ajax({url: "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + weatherKey + "&q=" + userLat + "%2C" + userLong, method: "GET"}).done(function(response) {
+    console.log(response);
       // drills down to get current temp (must be converted to farenheit), city, humidity, and wind
-      var city = response.name;
-      var temp = Math.round((9/5 * (response.main.temp - 273) + 32)) + "°F";
-      var humidity = response.main.humidity + "°";
-      var wind = response.wind.speed + "mph";
-      console.log(temp + " | " + humidity + " | " + wind);
+      // var city = response.name;
+      // var temp = Math.round((9/5 * (response.main.temp - 273) + 32)) + "°F";
+      // var humidity = response.main.humidity + "°";
+      // var wind = response.wind.speed + "mph";
+      // console.log(temp + " | " + humidity + " | " + wind);
   });
 };
 
@@ -169,6 +154,33 @@ function getTrails() {
         };
       }
   });
+};
+
+// function for randomly changing gradient when advice changes
+function randomGradient() {
+      var gradient = new Array ();
+      gradient[1] = "../img/gradients/gradient1.jpg";
+      gradient[2] = "../img/gradients/gradient2.jpg";
+      gradient[3] = "../img/gradients/gradient3.jpg";
+      gradient[4] = "../img/gradients/gradient4.jpg";
+      gradient[5] = "../img/gradients/gradient5.jpg";
+      gradient[6] = "../img/gradients/gradient6.jpg";
+      gradient[7] = "../img/gradients/gradient7.jpg";
+      gradient[8] = "../img/gradients/gradient8.jpg";
+      gradient[9] = "../img/gradients/gradient9.jpg";
+      gradient[10] = "../img/gradients/gradient10.jpg";
+      gradient[11] = "../img/gradients/gradient11.jpg";
+      gradient[12] = "../img/gradients/gradient12.jpg";
+      gradient[13] = "../img/gradients/gradient13.jpg";
+      gradient[14] = "../img/gradients/gradient14.jpg";
+      gradient[15] = "../img/gradients/gradient15.jpg";
+      gradient[16] = "../img/gradients/gradient16.jpg";
+      var rnd = Math.floor( Math.random() * gradient.length );
+      $("#gradient").fadeIn("fast", function() {
+        $(this).css("background-image", "url(" + gradient[rnd] + ")"), "fast", function() {
+          $(this).fadeOut("fast");
+        };
+      });
 };
 
 
