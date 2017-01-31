@@ -95,7 +95,8 @@ function displayRandomAdvice() {
           } else if (data.searchTerm) {
             adviceSearchTerm = data.searchTerm;
             console.log(adviceSearchTerm);
-          }  
+          } 
+    randomGradient(); 
     });
 };
 
