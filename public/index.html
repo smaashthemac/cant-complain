@@ -19,8 +19,8 @@
 
   <!-- CSS
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/skeleton.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/alertify.css" />
   <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
@@ -36,12 +36,12 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
 <container>
 	<div class="row">
-	  <div class="one column" id="sidebar-text">
+	  <div class="col-md-12" id="sidebar-text">
 	  	<div id="sidebar">
 	  		<h4>can't complain</h4>
 	  	</div>
 	  </div>
-      <div class="five columns" id="gradient">
+      <div class="col-md-5" id="gradient">
         <div class="gradient-content">
           <!--<p class="body">Tendrils of gossamer clouds, descended from astronomers tendrils of gossamer clouds, how far away circumnavigated, emerged into consciousness, not a sunrise but a galaxyrise? Not a sunrise but a galaxyrise a billion trillion, tendrils of gossamer clouds tesseract cosmos, shores of the cosmic ocean rich in mystery the carbon in our apple pies?</p>
           <p class="body">Decipherment ship of the imagination encyclopaedia galactica, cosmic ocean Vangelis globular star cluster cosmic ocean astonishment. Descended from astronomers billions upon billions tendrils of gossamer clouds descended from astronomers vastness is bearable only through love?</p>
@@ -49,13 +49,13 @@
   		    <p class="body">Decipherment ship of the imagination encyclopaedia galactica, cosmic ocean Vangelis globular star cluster cosmic ocean astonishment. Descended from astronomers billions upon billions tendrils of gossamer clouds descended from astronomers vastness is bearable only through love?</p>-->
         </div>
       </div>
-      <div class="six columns" id="thing-content">
+      <div class="col-md-6" id="thing-content">
 
       	<div class="nav">
       		<ul>
       			<li><a href="#">Home</a></li>&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
-      			<li><a href="#">About</a></li>&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      			<li><a href="#">Submit</a></li> 
+      			<li><a id="launchModal" data-toggle="modal" data-target="#about">About</a></li>&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      			<li><a id="launchModal" data-toggle="modal" data-target="#submit">Submit</a></li> 
       		</ul>
       		<!--<p>home  /  about  /  submit</p>-->
       	</div>
@@ -86,13 +86,59 @@
     </div>
 </container>
 
-<div id="map">
-</div>
+<!-- about modal -->
+  <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><h2>About Can't Complain</h2></h4>
+        </div>
+        <div class="modal-body">
+        <p id="modal">Hearts of the stars shores of the cosmic ocean, dream of the mind's eye rogue. Bits of moving fluff, cosmos tendrils of gossamer clouds. Paroxysm of global death. Colonies courage of our questions prime number. Jean-François Champollion? Tingling of the spine decipherment hydrogen atoms Orion's sword. Dream of the mind's eye dispassionate extraterrestrial observer. Concept of the number one. Intelligent beings rich in mystery finite but unbounded hundreds of thousands, from which we spring, take root and flourish and billions upon billions upon billions upon billions upon billions upon billions upon billions.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Thanks!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- submit modal -->
+  <div class="modal fade" id="submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><h2>Submit some advice</h2></h4>
+        </div>
+        <div class="modal-body">
+        <p id="modal">We would love more <i>feel good</i> advice! Submit yours in a short sentence below, and provide a couple of search terms you might use to help someone make your suggestion happen for themselves.</p>
+          <form>
+            <div class="form-group">
+              <label for="advice"><h5>Advice</h5></label>
+              <input type="email" class="form-control" id="advice" placeholder="Ex: Adopt a fucking pet.">
+            </div>
+            <div class="form-group">
+              <label for="searchTerms"><h5>Search Terms</h5></label>
+              <input type="email" class="form-control" id="searchTerms" placeholder="Ex: pet, adoption, shelters">
+            </div>
+            <div class="submit">
+              <button id="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- script dependencies -->
 
+<!-- firebase-->
+<script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
+
 <!-- Jquery -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Alertify -->
 <script src="js/alertify.min.js"></script>

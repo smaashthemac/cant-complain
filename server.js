@@ -4,7 +4,6 @@
 var express = require("express");
 var mongojs = require("mongojs");
 var bodyParser = require("body-parser");
-var mongoose = require("mongoose");
 
 // initialize express
 var app = express();
@@ -20,7 +19,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 // database configuration
 // save the url of the database as well as the name of the collection
-var databaseURL = "feelgood";
+var databaseURL = process.env.MONGODB_URI || "feelgood";
 var collection = ["advice"];
 
 // use mongojg to hook the database up to the db variable

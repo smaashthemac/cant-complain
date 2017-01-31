@@ -7,6 +7,14 @@ body {
 	font-family: 'Source Sans Pro', sans-serif;
 	cursor: cell;
 	color: #555;
+	
+}
+
+p#modal {
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 16px;
+	text-align: center;
+	text-transform: none;
 }
 
 p {
@@ -37,10 +45,19 @@ h1 {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
 	color: #eaa085;
-	margin-left: -110px;
+	margin-left: -140px;
 	margin-right: 20px;
 	font-size: 105px;
 	text-align: left !important;
+}
+
+h2 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 400;
+	text-transform: uppercase;
+	font-size: 35px !important;
+	font-size: 25px;
+	line-height: 1.5;
 }
 
 h3 {
@@ -61,15 +78,25 @@ h4 {
 	color: #fff;
 }
 
+h5 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: 300;
+	font-size: 16px;
+	color: #555;
+}
+
 button, button:focus {
 	width: 500px;
 	font-family: 'Nunito', sans-serif;
+	text-transform: uppercase;
 	font-weight: 400;
 	color: #eaa085;
-	font-size: 12px;
+	font-size: 14px;
 	background-color: transparent;
   	border-radius: 4px;
   	border: 1px solid #eaa085;
+  	height: 40px;
+  	margin-bottom: 20px;
 }
 
 button:hover {
@@ -97,7 +124,7 @@ span.icons {
 #sidebar {
 	position: fixed;
     top: 94%;
-    padding: 22px;
+    padding: 10px;
     transform-origin: 0 0;
     transform: rotate(-90deg) translate(0,0);
 }
@@ -171,4 +198,115 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', end
 	height: 25px;
 	background-color: #fff;
 	padding: 25px;
+	margin-bottom: 30px;
+}
+
+/* modal styles */
+
+.modal-content {
+    position: relative;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #999;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: 6px;
+    outline: 0;
+    -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
+    box-shadow: 0 3px 9px rgba(0,0,0,.5);
+}
+
+.modal-header {
+	text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    color: #eaa085;
+    font-family: 'Nunito', sans-serif;
+	font-weight: 400;
+	font-size: 80px;
+}
+
+.modal-body {
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-footer {
+	text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.btn-primary{
+	font-family: 'Nunito', sans-serif;
+	text-transform: uppercase;
+	font-weight: 400;
+	color: #FFF;
+	font-size: 14px;
+	background-color: #eaa085;
+  	border-radius: 4px;
+  	border: 1px solid #eaa085;
+  	height: 40px;
+  	margin: 20px 0px;
+
+}
+
+.btn-primary:hover {
+    color: #eaa085;
+  	background-color: #FFF;
+  	border-color: #FFF; 
+  	cursor: crosshair;
+  	border-radius: 4px;
+  	border: 1px solid #eaa085;
+}
+
+.btn-primary:active:hover,
+.btn-primary.active:hover,
+.open > .dropdown-toggle.btn-primary:hover,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.open > .dropdown-toggle.btn-primary:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.open > .dropdown-toggle.btn-primary.focus {
+  color: #eaa085;
+  	background-color: #FFF;
+  	border-color: #FFF; 
+  	cursor: crosshair;
+  	border-radius: 4px;
+  	border: 1px solid #eaa085;
+}
+
+/* form styles */
+
+.submit {
+	text-align: center;
+}
+
+label.class {
+	margin-left: 20px;
+}
+
+.form-control {
+  font-family: 'Source Sans Pro', sans-serif;
+  display: block;
+  width: 100%;
+  height: 40px;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: #888;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+  border-color: #eaa085;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 160, 133, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(234, 160, 133, .6);
 }

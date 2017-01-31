@@ -12,6 +12,7 @@ var adviceSearchTerm;
 // api keys
 var weatherKey = "df91bce1942a27843b3b36556dfc230e";
 var campgroundKey = "4xhxzg85vtzw2rqze6dv684j";
+var trailKey = "iApNnB6tFfmshslaidIgWbkRfgfZp1pocQ1jsnwF9jWfxtFIjC";
 var googleGeocodeKey = "AIzaSyBW-dCwfLOYD4tepelNbTvSHv9lJYoMc1I";
 var googleKey = "AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg";
 
@@ -23,6 +24,16 @@ var googleKey = "AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg";
 $("#buttonNo").click(function() {
   displayRandomAdvice();
 });
+
+// initialize firebase
+var config = {
+    apiKey: "AIzaSyAkckB-EevMjzbTDZCt4Wh2M7_3wx13-UU",
+    authDomain: "feelgoodadvice-fd190.firebaseapp.com",
+    databaseURL: "https://feelgoodadvice-fd190.firebaseio.com",
+    storageBucket: "feelgoodadvice-fd190.appspot.com",
+    messagingSenderId: "368164623318"
+  };
+  firebase.initializeApp(config);
 
 
 // ========== GEOLOCATION ========== //
@@ -122,6 +133,31 @@ function getWeather() {
   });
 };
 
+// this function delivers campsites information based on the user's location.
+// this isn't working for the same reason the google places call wasn't working...
+// revisit this
+function getCampsites() {
+  $.ajax({url: "http://api.amp.active.com/camping/campgrounds?landmarkName=true&landmarkLat=" + userLat + "&landmarkLong=" + userLong + "&xml=true&api_key=" + campgroundKey, method: "GET"}).done(function(response) {
+      // drills down and returns
+      console.log(response);
+  });
+};
+
+// this function delivers trail information based on the user's location.
+function getTrails() {
+  $.ajax({url: "https://trailapi-trailapi.p.mashape.com/?lat=" + userLat + "&limit=5&lon=" + userLong + "&q[activities_activity_type_name_eq]=hiking&radius=25&mashape-key=" + trailKey, method: "GET"}).done(function(response) {
+      // drills down and returns the name of the park, directions, and description.
+      for (var i = 0; i < response.places.length; i++) {
+        console.log(response.places[i].name);
+        console.log(response.places[i].directions);
+        // some trails don't have descriptions; if they do, show it. if not, don't.
+        if (response.places[i].description) {
+          console.log(response.places[i].description);
+        };
+      }
+  });
+};
+
 
 // this function, on click of the "i want to do that thing button" goes through a series of switch cases that represent every item in the database, because some take the user to an external page, some call upon the custom google search api, some use other apis.
 function doAdvice() {
@@ -156,7 +192,15 @@ function doAdvice() {
     case 26:
         placeSearch();
         break;
+    case 1:
+        getTrails();
+    case 27:
+    case 28:
+        getCampsites();
+    case 20:
+        // explore a new part of town
     }
 
   });
 };
+
