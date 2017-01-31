@@ -136,7 +136,7 @@ function placeSearch() {
 
 // this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
 function getWeather() {
-  $.ajax({url: "http://api.openweathermap.org/data/2.5/weather?APPID=" + weatherKey + "&q=" + userLocation, method: "GET"}).done(function(response) {
+  $.ajax({url: "https://api.openweathermap.org/data/2.5/weather?APPID=" + weatherKey + "&q=" + userLocation, method: "GET"}).done(function(response) {
       // drills down to get current temp (must be converted to farenheit), city, humidity, and wind
       var city = response.name;
       var temp = Math.round((9/5 * (response.main.temp - 273) + 32)) + "°F";
@@ -150,7 +150,7 @@ function getWeather() {
 // this isn't working for the same reason the google places call wasn't working...
 // revisit this
 function getCampsites() {
-  $.ajax({url: "http://api.amp.active.com/camping/campgrounds?landmarkName=true&landmarkLat=" + userLat + "&landmarkLong=" + userLong + "&xml=true&api_key=" + campgroundKey, method: "GET"}).done(function(response) {
+  $.ajax({url: "https://api.amp.active.com/camping/campgrounds?landmarkName=true&landmarkLat=" + userLat + "&landmarkLong=" + userLong + "&xml=true&api_key=" + campgroundKey, method: "GET"}).done(function(response) {
       // drills down and returns
       console.log(response);
   });
