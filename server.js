@@ -18,18 +18,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// // database configuration
-// // save the url of the database as well as the name of the collection
-// var databaseURL = process.env.MONGODB_URI || "feelgood";
-// var collection = ["advice"];
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-// // use mongojg to hook the database up to the db variable
-// var db = mongojs(databaseURL, collection);
+app.get('/', function(req, res, next) {
+  // Handle the get for this route
+});
 
-// // log any errors if mongodb has an issue
-// db.on("error", function(error) {
-// 	console.log("Database error: ", error);
-// });
+app.post('/', function(req, res, next) {
+ // Handle the post for this route
+});
 
 // MongoDB configuration
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/feelgood");
@@ -61,10 +62,10 @@ app.get("/random", function(req, res) {
 	});
 });
 
-var User = require("./userModel.js")
+var newAdvice = require("./model.js")
 app.post("/api/post", function(req, res) {
 	console.log(req.body);
-	User.create({
+	newAdvice.create({
 		thing: req.body.thing,
 		searchTerm: req.body.searchTerm	
 	}).then(function(results) {

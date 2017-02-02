@@ -42,7 +42,8 @@
 	  	</div>
 	  </div>
       <div class="col-md-5" id="gradient">
-        <div class="gradient-content">
+        <div id="gradient-content">
+          <div id="map"></div>
         </div>
       </div>
       <div class="col-md-6" id="thing-content">
@@ -110,15 +111,15 @@
         <p id="modal">We would love more <i>feel good</i> advice! Submit yours in a short sentence below, and provide a couple of search terms you might use to help someone make your suggestion happen for themselves.</p>
           <form>
             <div class="form-group">
-              <label for="advice"><h5>Advice</h5></label>
-              <input type="text" class="form-control" id="advice" placeholder="Ex: Adopt a fucking pet.">
+              <label for="thing"><h5>Advice</h5></label>
+              <input type="text" class="form-control" id="thing" placeholder="Ex: Adopt a fucking pet.">
             </div>
             <div class="form-group">
-              <label for="searchTerms"><h5>Search Terms</h5></label>
-              <input type="text" class="form-control" id="searchTerms" placeholder="Ex: pet, adoption, shelters">
+              <label for="searchTerm"><h5>Search Terms</h5></label>
+              <input type="text" class="form-control" id="searchTerm" placeholder="Ex: pet, adoption, shelters">
             </div>
             <div class="submit">
-              <button id="submit" class="btn btn-primary">Submit</button>
+              <button id="submitButton" class="btn btn-primary">Submit</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
           </form>
@@ -143,8 +144,8 @@
 <!-- app.js -->
 <script src="js/app.js"></script>
 
-<!-- google places library
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg&libraries=places"></script>-->
+<!--google places library-->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg&libraries=places"></script>
 
 
 <!-- End Document

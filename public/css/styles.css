@@ -10,6 +10,11 @@ body {
 	
 }
 
+#map {
+        height: 50%;
+        width: 50%;
+}
+
 img#logo {
 	width: 40px;
 	height: 40px;
@@ -186,7 +191,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', end
 	width: 42.5%;
 }
 
-.gradient-content {
+#gradient-content {
 	margin-top: 65px;
 	margin-bottom: 65px;
 	margin-left: 40px;

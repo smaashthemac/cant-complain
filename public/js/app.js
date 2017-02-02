@@ -112,15 +112,54 @@ function latLongConversion(lat, long) {
       // drills down and returns the user's city
       userLocation = response.results[4].address_components[1].short_name;
   });
+  initMap();
 };
 
 // this function uses the user's lat/long plus the current advice's search terms from the database, plugs them into the google places api, and returns top locations nearby
-function placeSearch() {
-  $.ajax({url: "https://maps.googleapis.com/maps/api/place/textsearch/json?location=" + userLat + "," + userLong + "&radius=500&query=" + adviceSearchTerm +"&key=" + googleKey, method: "GET"}).done(function(response) {
-      // drills down
-      console.log(response);
-  });
-};
+var map;
+var infowindow;
+
+      function initMap() {
+        console.log("map initiated");
+        var searchLocation = {lat: userLat, lng: userLong};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: searchLocation,
+          zoom: 12
+        });
+
+        infowindow = new google.maps.InfoWindow();
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: searchLocation,
+          radius: 8000,
+          keyword: ['restaurants']
+        }, callback);
+      }
+
+      function callback(results, status) {
+        console.log(results);
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            createMarker(results[i]);
+          }
+        }
+      }
+
+      function createMarker(place) {
+        console.log("markers created");
+        var placeLoc = place.geometry.location;
+        var marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infowindow.setContent(place.name);
+          infowindow.open(map, this);
+        });
+      }
+
 
 // this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
 function getWeather() {
@@ -145,20 +184,20 @@ function getCampsites() {
   });
 };
 
-// this function delivers trail information based on the user's location.
-function getTrails() {
-  $.ajax({url: "https://trailapi-trailapi.p.mashape.com/?lat=" + userLat + "&limit=5&lon=" + userLong + "&q[activities_activity_type_name_eq]=hiking&radius=25&mashape-key=" + trailKey, method: "GET"}).done(function(response) {
-      // drills down and returns the name of the park, directions, and description.
-      for (var i = 0; i < response.places.length; i++) {
-        console.log(response.places[i].name);
-        console.log(response.places[i].directions);
-        // some trails don't have descriptions; if they do, show it. if not, don't.
-        if (response.places[i].description) {
-          console.log(response.places[i].description);
-        };
-      }
-  });
-};
+// // this function delivers trail information based on the user's location.
+// function getTrails() {
+//   $.ajax({url: "https://trailapi-trailapi.p.mashape.com/?lat=" + userLat + "&limit=5&lon=" + userLong + "&q[activities_activity_type_name_eq]=hiking&radius=25&mashape-key=" + trailKey, method: "GET"}).done(function(response) {
+//       // drills down and returns the name of the park, directions, and description.
+//       for (var i = 0; i < response.places.length; i++) {
+//         console.log(response.places[i].name);
+//         console.log(response.places[i].directions);
+//         // some trails don't have descriptions; if they do, show it. if not, don't.
+//         if (response.places[i].description) {
+//           console.log(response.places[i].description);
+//         };
+//       }
+//   });
+// };
 
 // function for randomly changing gradient when advice changes
 function randomGradient() {
@@ -214,6 +253,9 @@ function doAdvice() {
     case 24:
     case 25:
         placeSearch();
+        console.log("clicked");
+        break;
+    case 1:
     case 6:
     case 9:
     case 12:
@@ -222,40 +264,42 @@ function doAdvice() {
     case 20:
     case 26:
         placeSearch();
-        getWeather();
+        console.log("clicked");
+        //getWeather();
         break;
-    case 1:
-        getTrails();
-        getWeather();
     case 27:
     case 28:
+        // do the google places search but expand radius
         getCampsites();
-        getWeather();
+        //getWeather();
+        break;
     }
 
   });
 };
 
 // When user clicks submit button
-$("#submit").on("click", function(event) {
+$("#submitButton").on("click", function(event) {
   event.preventDefault();
 
   // Make a newChirp object
   var newAdvice = {
-    thing: $("#advice").val(),
+    thing: $("#thing").val(),
     searchTerm: $("#searchTerm").val()
   };
 
-  console.log(newAdvice);
-
   // Send an AJAX POST-request with jQuery
-  $.post("/api/post", newAdvice)
+  // console.log(newAdvice);
+  $.ajax({
+    method: "POST",
+    url: "/api/post", 
+    data: newAdvice
+  })
     // On success, run the following code
     .done(function() {
-    });
-
-  // Empty each input box by replacing the value with an empty string
-  $("#advice").val("");
+      // Empty each input box by replacing the value with an empty string
+  $("#thing").val("");
   $("#searchTerm").val("");
+    });
 });
 

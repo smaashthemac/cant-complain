@@ -15,7 +15,13 @@ var userSchema = new Schema({
     ]
  },
  searchTerm: {
-   type: String
+   type: String,
+   validate: [
+      function(input) {
+        return input.length <= 60;
+      },
+      "Your search terms must be 60 characters or less."
+    ]
  }
 
 });
