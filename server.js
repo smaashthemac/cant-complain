@@ -46,7 +46,6 @@ db.once("open", function() {
 // ========== ROUTES ========== //
 
 var Advice = require("./model.js")
-
 // get one random piece of advice from advice collection
 app.get("/random", function(req, res) {
 	var random = Math.floor(Math.random() * 28);
@@ -60,6 +59,18 @@ app.get("/random", function(req, res) {
 			console.log(doc);
 		}
 	});
+});
+
+var User = require("./userModel.js")
+app.post("/api/post", function(req, res) {
+	console.log(req.body);
+	User.create({
+		thing: req.body.thing,
+		searchTerm: req.body.searchTerm	
+	}).then(function(results) {
+		res.end();
+	});
+
 });
 
 // set the app to listen on port 3000

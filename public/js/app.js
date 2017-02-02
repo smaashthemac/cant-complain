@@ -8,9 +8,12 @@ var advice;
 var adviceNumber;
 var adviceLink;
 var adviceSearchTerm;
+var weather;
+var currentWeather;
+var humidity;
 
 // api keys
-var weatherKey = "qxjFsG464oGf6g9yZCPBnT8UycfEDGOR";
+var weatherKey = "171d339521b42a7b";
 var campgroundKey = "4xhxzg85vtzw2rqze6dv684j";
 var trailKey = "iApNnB6tFfmshslaidIgWbkRfgfZp1pocQ1jsnwF9jWfxtFIjC";
 var googleGeocodeKey = "AIzaSyBW-dCwfLOYD4tepelNbTvSHv9lJYoMc1I";
@@ -97,6 +100,8 @@ function displayRandomAdvice() {
             console.log(adviceSearchTerm);
           } 
     randomGradient(); 
+    doAdvice();
+    $(".gradient-content").empty();
     });
 };
 
@@ -106,14 +111,12 @@ function latLongConversion(lat, long) {
   $.ajax({url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + userLat + "," + userLong + "&key=" + googleGeocodeKey, method: "GET"}).done(function(response) {
       // drills down and returns the user's city
       userLocation = response.results[4].address_components[1].short_name;
-      console.log(userLocation);
-      //getWeather();
   });
 };
 
 // this function uses the user's lat/long plus the current advice's search terms from the database, plugs them into the google places api, and returns top locations nearby
 function placeSearch() {
-  $.ajax({url: "https://maps.googleapis.com/maps/api/place/textsearch/json?location=" + userLat + "," + userLong + "&radius=500&query=" + adviceSearchTerm +"&key=" + googleKey, method: "GET", dataType: "JSONP"}).done(function(response) {
+  $.ajax({url: "https://maps.googleapis.com/maps/api/place/textsearch/json?location=" + userLat + "," + userLong + "&radius=500&query=" + adviceSearchTerm +"&key=" + googleKey, method: "GET"}).done(function(response) {
       // drills down
       console.log(response);
   });
@@ -121,14 +124,14 @@ function placeSearch() {
 
 // this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
 function getWeather() {
-  $.ajax({url: "http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey=" + weatherKey + "&q=" + userLat + "%2C" + userLong, method: "GET"}).done(function(response) {
-    console.log(response);
-      // drills down to get current temp (must be converted to farenheit), city, humidity, and wind
-      // var city = response.name;
-      // var temp = Math.round((9/5 * (response.main.temp - 273) + 32)) + "°F";
-      // var humidity = response.main.humidity + "°";
-      // var wind = response.wind.speed + "mph";
-      // console.log(temp + " | " + humidity + " | " + wind);
+  $.ajax({url: "https://api.wunderground.com/api/" + weatherKey + "/geolookup/q/" + userLat + "," + userLong + ".json", method: "GET"}).done(function(response) {
+    $.ajax({url: "https://api.wunderground.com/api/" + weatherKey + "/conditions/q/" + response.location.state + "/" + response.location.city + ".json", method: "GET"}).done(function(response) {
+      weather = response.current_observation.weather;
+      currentWeather = response.current_observation.temperature_string;
+      humidity = response.current_observation.relative_humidity;
+      console.log(weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity");
+      $(".gradient-content").html("<h2 class='content'><i class='fa fa-sun-o fa-1x'></i> Local Weather</h2><h3 class='content'>" + weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity</h3>");
+    });
   });
 };
 
@@ -204,29 +207,55 @@ function doAdvice() {
         break;
     case 2:
     case 4:
-    case 6:
-    case 9:
     case 11:
-    case 12:
-    case 13:
     case 14:
-    case 16:
     case 22:
     case 23:
     case 24:
     case 25:
+        placeSearch();
+    case 6:
+    case 9:
+    case 12:
+    case 13:
+    case 16:
+    case 20:
     case 26:
         placeSearch();
+        getWeather();
         break;
     case 1:
         getTrails();
+        getWeather();
     case 27:
     case 28:
         getCampsites();
-    case 20:
-        // explore a new part of town
+        getWeather();
     }
 
   });
 };
+
+// When user clicks submit button
+$("#submit").on("click", function(event) {
+  event.preventDefault();
+
+  // Make a newChirp object
+  var newAdvice = {
+    thing: $("#advice").val(),
+    searchTerm: $("#searchTerm").val()
+  };
+
+  console.log(newAdvice);
+
+  // Send an AJAX POST-request with jQuery
+  $.post("/api/post", newAdvice)
+    // On success, run the following code
+    .done(function() {
+    });
+
+  // Empty each input box by replacing the value with an empty string
+  $("#advice").val("");
+  $("#searchTerm").val("");
+});
 
