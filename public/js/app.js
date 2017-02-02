@@ -1,8 +1,8 @@
 // ========== GLOBAL STUFF ========== //
 
 // variables
-var userLat;
-var userLong;
+var userLat = 30.287151699999995;
+var userLong = -97.7288607;
 var userLocation;
 var advice;
 var adviceNumber;
@@ -22,9 +22,13 @@ var googleKey = "AIzaSyArRr8-sS7MqEyrSQIko_YvACo-kFOZjUg";
 // ========== ON PAGE LOAD ========== //
 // initially show a piece of advice on page load
 displayRandomAdvice();
+$("#topThree").hide();
 // on "show me another thing" button click
 $("#buttonNo").click(function() {
   displayRandomAdvice();
+  $("#weather").hide();
+  $("#topThree").hide();
+  $("#map").hide();  
 
 });
 
@@ -112,54 +116,71 @@ function latLongConversion(lat, long) {
       // drills down and returns the user's city
       userLocation = response.results[4].address_components[1].short_name;
   });
-  initMap();
 };
 
-// this function uses the user's lat/long plus the current advice's search terms from the database, plugs them into the google places api, and returns top locations nearby
+// this function uses the user's lat/long plus the current advice's search terms from the database, plugs them into the google places api, and returns top locations nearby as well as the points on the map
 var map;
 var infowindow;
 
-      function initMap() {
-        console.log("map initiated");
-        var searchLocation = {lat: userLat, lng: userLong};
+function initMap() {
+  var searchLocation = {lat: userLat, lng: userLong};
+    map = new google.maps.Map(document.getElementById('map'), {
+      center: searchLocation,
+      zoom: 11
+    });
 
-        map = new google.maps.Map(document.getElementById('map'), {
-          center: searchLocation,
-          zoom: 12
-        });
+  $("#map").hide();
 
-        infowindow = new google.maps.InfoWindow();
-        var service = new google.maps.places.PlacesService(map);
-        service.nearbySearch({
-          location: searchLocation,
-          radius: 8000,
-          keyword: ['restaurants']
-        }, callback);
-      }
+  infowindow = new google.maps.InfoWindow();
+  var service = new google.maps.places.PlacesService(map);
+  service.nearbySearch({
+      location: searchLocation,
+      radius: 10000,
+      keyword: [adviceSearchTerm]
+    }, callback);
+}
 
-      function callback(results, status) {
-        console.log(results);
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
-          }
-        }
-      }
+function callback(results, status) {
+  if (status === google.maps.places.PlacesServiceStatus.OK) {
+    for (var i = 0; i < results.length; i++) {
+      createMarker(results[i]);
+    }
+  }
+  // this drills down and applies information from the top three closest results to the place variables
+    $("#topThree").html("<h1 class='content'><i class='fa fa-globe fa-1x'></i> Top Results</h1>");
+    for (var i = 0; i <= 2; i++) {
+      placeName = results[i].name;
+      vicinity = results[i].vicinity;
+      // and displays it on the page
+      $("#topThree").append("<h2 class='content'>" + placeName + "</h2><h3 class='content'>" + vicinity + "</h3>"); 
+    };
+}
 
-      function createMarker(place) {
-        console.log("markers created");
-        var placeLoc = place.geometry.location;
-        var marker = new google.maps.Marker({
-          map: map,
-          position: place.geometry.location
-        });
+function createMarker(place) {
+console.log("markers created");
+var placeLoc = place.geometry.location;
+var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+});
 
-        google.maps.event.addListener(marker, 'click', function() {
-          infowindow.setContent(place.name);
-          infowindow.open(map, this);
-        });
-      }
+  google.maps.event.addListener(marker, 'click', function() {
+  infowindow.setContent(place.name);
+  infowindow.open(map, this);
+  });
+};
 
+function placeSearch() {
+  initMap();
+  $("#weather").show();
+  $("#topThree").show();
+  $("#map").show(); 
+};
+
+// this function drills down into the map markers and returns information on the top three results to display via text above the map
+function getPlace() {
+
+};
 
 // this is the app to get the user's current city weather data via the open weather map app. this is for some pieces of advice that require going outside.
 function getWeather() {
@@ -169,7 +190,7 @@ function getWeather() {
       currentWeather = response.current_observation.temperature_string;
       humidity = response.current_observation.relative_humidity;
       console.log(weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity");
-      $(".gradient-content").html("<h2 class='content'><i class='fa fa-sun-o fa-1x'></i> Local Weather</h2><h3 class='content'>" + weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity</h3>");
+      $("#weather").html("<h1 class='content'><i class='fa fa-sun-o fa-1x'></i> Local Weather</h1><h3 class='content'>" + weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity</h3>");
     });
   });
 };
@@ -216,8 +237,8 @@ function randomGradient() {
       gradient[12] = "../img/gradients/gradient12.jpg";
       gradient[13] = "../img/gradients/gradient13.jpg";
       gradient[14] = "../img/gradients/gradient14.jpg";
-      gradient[15] = "../img/gradients/gradient15.jpg";
       gradient[16] = "../img/gradients/gradient16.jpg";
+      gradient[17] = "../img/gradients/gradient17.jpg";
       var rnd = Math.floor( Math.random() * gradient.length );
       $("#gradient").fadeIn("fast", function() {
         $(this).css("background-image", "url(" + gradient[rnd] + ")"), "fast", function() {
@@ -231,7 +252,7 @@ function randomGradient() {
 function doAdvice() {
   $("#buttonYes").click(function() {
 
-    switch(adviceNumber) {
+switch(adviceNumber) {
     case 3:
     case 5:
     case 7:
@@ -244,37 +265,28 @@ function doAdvice() {
     case 21:
         window.open(adviceLink);
         break;
+    case 1:
     case 2:
     case 4:
+    case 6:
+    case 9:
     case 11:
+    case 12:
+    case 13:
     case 14:
+    case 16:
+    case 20:
     case 22:
     case 23:
     case 24:
     case 25:
-        placeSearch();
-        console.log("clicked");
-        break;
-    case 1:
-    case 6:
-    case 9:
-    case 12:
-    case 13:
-    case 16:
-    case 20:
     case 26:
-        placeSearch();
-        console.log("clicked");
-        //getWeather();
-        break;
     case 27:
     case 28:
-        // do the google places search but expand radius
-        getCampsites();
-        //getWeather();
+        placeSearch();
+        getWeather();
         break;
     }
-
   });
 };
 

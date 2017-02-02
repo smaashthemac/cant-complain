@@ -6,13 +6,7 @@ body {
 	background: #fff;
 	font-family: 'Source Sans Pro', sans-serif;
 	cursor: cell;
-	color: #555;
-	
-}
-
-#map {
-        height: 50%;
-        width: 50%;
+	color: #555;	
 }
 
 img#logo {
@@ -100,26 +94,28 @@ h5 {
 h1.content {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 300;
-	font-size: 35px;
+	font-size: 38px !important;
 	text-transform: uppercase;
 	color: #FFF;
 	margin-left: 0;
+	margin-bottom: -5px;
 }
 
 h2.content {
-	font-family: 'Nunito', sans-serif;
+	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 300;
-	font-size: 30px !important;
+	font-size: 24px !important;
 	color: #FFF;
 	margin-left: 0;
 	margin-bottom: -18px;
-	text-transform: uppercase;
+	margin-top: 8px;
+	text-transform: none;
 }
 
 h3.content {
 	font-family: 'Source Sans Pro', sans-serif;
 	font-weight: 300;
-	font-size: 19px;
+	font-size: 16px;
 	color: #FFF;
 	margin-left: 0;
 	margin-bottom: 10px;
@@ -196,6 +192,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', end
 	margin-bottom: 65px;
 	margin-left: 40px;
 	margin-right: 130px;
+}
+
+#map {
+    position: absolute;
+    height: 300px;
+    width: 610px;
+    margin-top: 105px;
+}
+
+#weather {
+}
+
+#topThree {
+	margin-top: 100px;
 }
 
 #thing-content {
