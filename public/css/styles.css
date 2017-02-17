@@ -51,7 +51,7 @@ h1 {
 	font-family: 'Nunito', sans-serif;
 	font-weight: 400;
 	color: #eaa085;
-	margin-left: -140px;
+	margin-left: -130px;
 	margin-right: 20px;
 	font-size: 105px;
 	text-align: left !important;
@@ -172,16 +172,7 @@ span.icons {
 }
 
 #gradient {
-	background-image: url(../img/gradients/gradient15.jpg);
 	background-size: cover;
-	/*background: rgba(110,148,201,1);
-background: -moz-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
-background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(110,148,201,1)), color-stop(49%, rgba(151,201,184,1)), color-stop(100%, rgba(224,248,180,1)));
-background: -webkit-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
-background: -o-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
-background: -ms-linear-gradient(-45deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
-background: linear-gradient(135deg, rgba(110,148,201,1) 0%, rgba(151,201,184,1) 49%, rgba(224,248,180,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', endColorstr='#e0f8b4', GradientType=1 );*/
 	margin-left: 0px;
 	height: 100vh;
 	width: 42.5%;
@@ -198,14 +189,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6e94c9', end
     position: absolute;
     height: 300px;
     width: 610px;
-    margin-top: 105px;
+    margin-top: 92px;
 }
 
 #weather {
 }
 
 #topThree {
-	margin-top: 100px;
+	margin-top: 94px;
 }
 
 #thing-content {

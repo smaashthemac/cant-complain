@@ -60,6 +60,7 @@ function geoFindMe() {
     userLong = position.coords.longitude;
     console.log(userLat, userLong);
     latLongConversion();
+    //getWeather();
 
     // let the console log and user know we've got their location
     //console.log("Thanks! Got your location.")
@@ -126,7 +127,167 @@ function initMap() {
   var searchLocation = {lat: userLat, lng: userLong};
     map = new google.maps.Map(document.getElementById('map'), {
       center: searchLocation,
-      zoom: 11
+      zoom: 11,
+      styles: [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
+]
     });
 
   $("#map").hide();
@@ -161,7 +322,8 @@ console.log("markers created");
 var placeLoc = place.geometry.location;
 var marker = new google.maps.Marker({
     map: map,
-    position: place.geometry.location
+    position: place.geometry.location,
+    icon: 'http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|eaa085'
 });
 
   google.maps.event.addListener(marker, 'click', function() {
@@ -189,64 +351,23 @@ function getWeather() {
       weather = response.current_observation.weather;
       currentWeather = response.current_observation.temperature_string;
       humidity = response.current_observation.relative_humidity;
-      console.log(weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity");
-      $("#weather").html("<h1 class='content'><i class='fa fa-sun-o fa-1x'></i> Local Weather</h1><h3 class='content'>" + weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity</h3>");
     });
   });
 };
 
-// this function delivers campsites information based on the user's location.
-// this isn't working for the same reason the google places call wasn't working...
-// revisit this
-function getCampsites() {
-  $.ajax({url: "https://api.amp.active.com/camping/campgrounds?landmarkName=true&landmarkLat=" + userLat + "&landmarkLong=" + userLong + "&xml=true&api_key=" + campgroundKey, method: "GET"}).done(function(response) {
-      // drills down and returns
-      console.log(response);
-  });
+function displayWeather() {
+  console.log(weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity");
+  $("#weather").html("<h1 class='content'><i class='fa fa-sun-o fa-1x'></i> Local Weather</h1><h3 class='content'>" + weather + " | Current Temp: " + currentWeather + " | " + humidity + " Humidity</h3>");
 };
-
-// // this function delivers trail information based on the user's location.
-// function getTrails() {
-//   $.ajax({url: "https://trailapi-trailapi.p.mashape.com/?lat=" + userLat + "&limit=5&lon=" + userLong + "&q[activities_activity_type_name_eq]=hiking&radius=25&mashape-key=" + trailKey, method: "GET"}).done(function(response) {
-//       // drills down and returns the name of the park, directions, and description.
-//       for (var i = 0; i < response.places.length; i++) {
-//         console.log(response.places[i].name);
-//         console.log(response.places[i].directions);
-//         // some trails don't have descriptions; if they do, show it. if not, don't.
-//         if (response.places[i].description) {
-//           console.log(response.places[i].description);
-//         };
-//       }
-//   });
-// };
 
 // function for randomly changing gradient when advice changes
-function randomGradient() {
-      var gradient = new Array ();
-      gradient[1] = "../img/gradients/gradient1.jpg";
-      gradient[2] = "../img/gradients/gradient2.jpg";
-      gradient[3] = "../img/gradients/gradient3.jpg";
-      gradient[4] = "../img/gradients/gradient4.jpg";
-      gradient[5] = "../img/gradients/gradient5.jpg";
-      gradient[6] = "../img/gradients/gradient6.jpg";
-      gradient[7] = "../img/gradients/gradient7.jpg";
-      gradient[8] = "../img/gradients/gradient8.jpg";
-      gradient[9] = "../img/gradients/gradient9.jpg";
-      gradient[10] = "../img/gradients/gradient10.jpg";
-      gradient[11] = "../img/gradients/gradient11.jpg";
-      gradient[12] = "../img/gradients/gradient12.jpg";
-      gradient[13] = "../img/gradients/gradient13.jpg";
-      gradient[14] = "../img/gradients/gradient14.jpg";
-      gradient[16] = "../img/gradients/gradient16.jpg";
-      gradient[17] = "../img/gradients/gradient17.jpg";
-      var rnd = Math.floor( Math.random() * gradient.length );
-      $("#gradient").fadeIn("fast", function() {
-        $(this).css("background-image", "url(" + gradient[rnd] + ")"), "fast", function() {
-          $(this).fadeOut("fast");
-        };
-      });
-};
+var gradientArray = ["../img/gradients/gradient1.jpg", "../img/gradients/gradient2.jpg", "../img/gradients/gradient3.jpg", "../img/gradients/gradient4.jpg", "../img/gradients/gradient5.jpg", "../img/gradients/gradient6.jpg", "../img/gradients/gradient7.jpg", "../img/gradients/gradient8.jpg", "../img/gradients/gradient9.jpg", "../img/gradients/gradient10.jpg", "../img/gradients/gradient11.jpg", "../img/gradients/gradient12.jpg", "../img/gradients/gradient13.jpg", "../img/gradients/gradient14.jpg", "../img/gradients/gradient16.jpg", ];
 
+function randomGradient() {
+    var num = Math.floor( Math.random() * gradientArray.length );
+    var img = gradientArray[ num ];
+    $('#gradient').css("background-image", "url(" + img + ")");  
+};
 
 // this function, on click of the "i want to do that thing button" goes through a series of switch cases that represent every item in the database, because some take the user to an external page, some call upon the custom google search api, some use other apis.
 function doAdvice() {
@@ -284,7 +405,7 @@ switch(adviceNumber) {
     case 27:
     case 28:
         placeSearch();
-        getWeather();
+        //displayWeather();
         break;
     }
   });
