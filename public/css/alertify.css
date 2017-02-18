@@ -850,8 +850,8 @@
   margin-top: 10px;
 }
 .alertify-notifier .ajs-message.ajs-success {
-  background: #eaa085;
-  color: white;
+  background: #fff;
+  color: #eaa085;
 }
 .alertify-notifier .ajs-message.ajs-error {
   background: rgba(217, 92, 92, 0.95);
@@ -863,16 +863,18 @@
   top: 10px;
 }
 .alertify-notifier.ajs-bottom {
-  top: 10px;
+  /* this changes */
+  top: 110px;
 }
 .alertify-notifier.ajs-right {
   left: 10px;
 }
 .alertify-notifier.ajs-right .ajs-message {
-  left: -320px;
+  left: -220px;
 }
 .alertify-notifier.ajs-right .ajs-message.ajs-visible {
-  left: 100px;
+  /* this changes */
+  left: 10px;
 }
 .alertify-notifier.ajs-left {
   right: 10px;
