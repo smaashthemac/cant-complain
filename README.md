@@ -16,7 +16,7 @@ This project was created as an assignment for the Coding Bootcamp at UT Austin.
 - Skeleton
 - MongoDB
 - Mongoose
-- Geolocatino
+- Geolocation
 - Open Weather API
 - Google Javacript API
 
