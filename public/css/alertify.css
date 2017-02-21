@@ -850,8 +850,8 @@
   margin-top: 10px;
 }
 .alertify-notifier .ajs-message.ajs-success {
-  background: #fff;
-  color: #eaa085;
+  background: #eaa085;
+  color: #fff;
 }
 .alertify-notifier .ajs-message.ajs-error {
   background: rgba(217, 92, 92, 0.95);
@@ -864,7 +864,7 @@
 }
 .alertify-notifier.ajs-bottom {
   /* this changes */
-  top: 110px;
+  top: 85px;
 }
 .alertify-notifier.ajs-right {
   left: 10px;

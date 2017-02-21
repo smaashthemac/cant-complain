@@ -60,7 +60,7 @@ function geoFindMe() {
     userLong = position.coords.longitude;
     console.log(userLat, userLong);
     latLongConversion();
-    //getWeather();
+    getWeather();
 
     // let the console log and user know we've got their location
     //console.log("Thanks! Got your location.")
@@ -405,7 +405,7 @@ switch(adviceNumber) {
     case 27:
     case 28:
         placeSearch();
-        //displayWeather();
+        displayWeather();
         break;
     }
   });
