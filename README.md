@@ -4,7 +4,7 @@ Can't complain is an application with endless pieces of advice to make you feel 
 
 On load, the page grabs the user's location and displays a random piece of advice from a database. The user can click again and again until they find one they're interested in, then based on the type of advice, the app will return results from a number of API's — for local trails, and weather, for example. It also utilizes Google Maps.
 
-This project was created as an assignment for the Coding Bootcamp at UT Austin.
+This was created as my final project for the Coding Bootcamp at UT Austin.
 
 <a href="https://aqueous-anchorage-59982.herokuapp.com/">View the finished product on Heroku.</a>
 
